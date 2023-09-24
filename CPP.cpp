@@ -1,12 +1,18 @@
 ﻿
 
 #include <iostream>
+#include <cmath>
+#include <Windows.h> 
 using namespace std;
 void task1();
 void task2();
 void task3();
 void task4();
 void task5();
+void task6();
+void task7();
+void Lab2();
+void test();
 // 1) Ввести строку через cin - вывести её несколько раз помноженную на саму себя от 1 до x (x > 0)
     //Пример:
     //"Vlad" - ввели
@@ -19,10 +25,17 @@ void task5();
 //  2) ввести число x
     //Вывести все числа от 1 до x, которые являются делителями числа x(x% делитель == 0)
 // Написать программу выбора из трех чисел 
+//  3) ввести два числа x и y - это катеты(положительные)
+//  Посчитать гипотенузу такого треугольника
+//  4) Проверить что треугольник прямоугольный
+//  Треугольник прямоугольный, если для его трёх сторон верно :
+//  x ^ 2 = a ^ 2 + b ^ 2
+//  вывести YES или NO взависимости от результата
+
 
 int main()
 {
-    task5();
+    Lab2();
 }
 
 void task1()
@@ -196,4 +209,119 @@ void task5()
 
    
 }
+void Lab2()
+{
+    setlocale(LC_ALL, "RUS");
+    float x, y, fx = 0, a = 0;
+    int g;
+    cout << "Введите x: ";
+    cin >> x;
+    cout << "Введите y: ";
+    cin >> y;
+    cout << "Исходные данные: x=" << x << " "  "y=" << y <<  "\n";
+    cout << "Выберите нужную вам функцию: \n(1)sh(x)\n(2)e^x\n(3)x^2\nЧто выбираете: ";
+    cin >> g;
+    switch (g)
+    {
+    case 1:
+        fx = sinh(x);
+        break;
+    case 2:
+        fx = exp(x);
+        break;
+    case 3:
+        fx = pow(x, 2);
+        break;
+    default:
+        cout << "Ошибка, введенное вами число не соответствует ни одной функции!";
+        break;
+
+    }
+    if ((x * y) > 0)
+    {
+        a = pow((fx + y), 2) - cbrt(fabs(fx));
+        cout << "Значение функции равно: " << a << "\n";
+
+    }
+    if (x * y < 0)
+    {
+        a = pow((fx + y), 2) + sin(x);
+        cout << "Значение функции равно: " << a << "\n";
+    }
+    if (x * y == 0)
+    {
+        a = pow((fx + y), 2) + pow(y, 3);
+        cout << "Значение функции равно: " << a << "\n";
+    }
+    
+  
+}
+
+void task6()
+{
+    setlocale(LC_ALL, "RUS");
+    double a, b,g=0;
+    cout << "Please Enter number:";
+    cin >> a;
+    cout << "Please Enter number2:";
+    cin >> b;
+    if (a <0 || b < 0)
+    {
+        cout<<"he cathet cannot be negative";
+    }
+    else
+    {
+       g = sqrt(pow(a, 2) + pow(b, 2)); 
+
+        cout << "Гипотенуза треугольника с катетами " << a << " и " << b << " равна " <<g << "\n";
+
+    }
+
+
+}
+void task7()
+{
+    setlocale(LC_ALL, "RUS");
+    double a, b, y;
+    double x, i, c;
+    cout << "Please Enter number:";
+    cin >> a;
+    cout << "Please Enter number2:";
+    cin >> b;
+    cout << "Please Enter number3:";
+    cin >> y;
+    x = pow(a, 2);
+    i = pow(b, 2);
+    c = pow(y, 2);
+    if (x + i == c)
+    {
+        cout << "Результата выполнения программы:""YES""\n";
+    }
+    else
+    {
+        cout <<"Результата выполнения программы:" "NO""\n";
+    }
+
+
+}
+
+void test()
+{
+    setlocale(LC_ALL, "RUS");
+    int chislo;
+    cout << "\t\t\tТаблица умножения введенного числа\n";
+    cout << "\t\t\t----------------------------------\n";
+    cout << endl;
+    cout << "Введите число:  ";
+    cin >> chislo;
+    cout << endl;
+    for (int j = 1; j <= 10; j++)
+    {
+        cout << j << " * " << chislo << " = " << j * chislo << endl;
+
+    }
+    cout << endl;
+    
+}
+
 
