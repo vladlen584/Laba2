@@ -12,7 +12,10 @@ void task5();
 void task6();
 void task7();
 void Lab2();
+void lab3();
 void test();
+void Lab3B();
+void Lab4();
 // 1) Ввести строку через cin - вывести её несколько раз помноженную на саму себя от 1 до x (x > 0)
     //Пример:
     //"Vlad" - ввели
@@ -35,7 +38,7 @@ void test();
 
 int main()
 {
-    Lab2();
+    Lab4();
 }
 
 void task1()
@@ -323,5 +326,64 @@ void test()
     cout << endl;
     
 }
+
+void lab3()
+{
+    setlocale(LC_ALL, "Rus");
+    double a, b, h;
+    int n;
+    cout << "Введите a: ";
+    cin >> a;
+    cout << "Введите b: ";
+    cin >> b;
+    cout << "Введите n: ";
+    cin >> n;
+    h = (b - a) / 10;
+    cout << "x\t\ty(x)\n";
+    for (double x = a; x <= b; x = x + h)
+    {
+        double y = 0;
+        for (int i = 1; i <= n; i++)
+        {
+            y += sin(i * x) + pow(cos(i), 2);
+        }
+        cout << x << "\t\t" << y << endl;
+    }
+
+}
+
+void Lab3B()
+{
+    double a = 0.1, b = 1, h = (b - a) / 10;
+    double x, y, s;
+    int k = 160;
+
+    cout << "x\t\ty(x)\t\ts(x)\n";
+    for (x = a; x <= b; x += h)
+    {
+        y = sin(x);
+        s = sin(x);
+        double term = x;
+        for (int n = 1; n <= k; n++)
+        {
+            term *= -1 * pow(x, 2) / ((2 * n + 1) * (2 * n));
+            s = s+term;
+        }
+        cout << x << "\t\t" << y << "\t\t" << s << "\n";
+    }
+
+    
+}
+
+void Lab4()
+{
+
+}
+
+
+
+
+
+
 
 
