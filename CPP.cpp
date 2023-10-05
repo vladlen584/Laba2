@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cmath>
 #include <Windows.h> 
+#include <algorithm>
 using namespace std;
 void task1();
 void task2();
@@ -16,6 +17,8 @@ void lab3();
 void test();
 void Lab3B();
 void Lab4();
+void Lab4B();
+void Lab5();
 // 1) Ввести строку через cin - вывести её несколько раз помноженную на саму себя от 1 до x (x > 0)
     //Пример:
     //"Vlad" - ввели
@@ -38,7 +41,7 @@ void Lab4();
 
 int main()
 {
-    Lab4();
+    Lab4B();
 }
 
 void task1()
@@ -362,11 +365,11 @@ void Lab3B()
     for (x = a; x <= b; x += h)
     {
         y = sin(x);
-        s = sin(x);
+        s = x;
         double term = x;
-        for (int n = 1; n <= k; n++)
+        for (double n = 1; n <= k; n++)
         {
-            term *= -1 * pow(x, 2) / ((2 * n + 1) * (2 * n));
+            term *= -1 * (pow(x, 2) / ((2 * n + 1) * (2 * n)));
             s = s+term;
         }
         cout << x << "\t\t" << y << "\t\t" << s << "\n";
@@ -377,7 +380,112 @@ void Lab3B()
 
 void Lab4()
 {
+    setlocale(LC_ALL, "Rus");
+    int arr[10];
+    int sumPositive = 0;
+    int productNegative = 1;
 
+    for (int i = 0; i < 10; i++) {
+        cout << "Введите " << i + 1 << "-й элемент массива: ";
+        cin >> arr[i];
+    }
+
+    for (int i = 0; i < 10; i++) {
+        if (arr[i] > 0) {
+            sumPositive += arr[i];
+        }
+        else if (arr[i] < 0) {
+            productNegative *= arr[i];
+        }
+    }
+    cout << "Сумма положительных элементов: " << sumPositive << endl;
+    cout << "Произведение отрицательных элементов: " << productNegative << endl;
+}
+
+void Lab4B()
+{
+    setlocale(LC_ALL, "Rus");
+   /* Установим размер массива */
+	int n; // Кол-во элементов
+	cout << "Количество элементов: ";
+	cin >> n; 
+	
+	/* Заполним массив значениями */
+    int* mass = new int[n];
+	for(int i = 0; i < n; ++i)
+	{
+		cout << i+1 << "-ый элемент: ";
+		cin >> mass[i]; 
+	} 
+	
+	/* Выведем исходный массив */
+	cout << "Исходный массив: ";
+	for(int i = 0; i < n; ++i)
+	{
+		cout << mass[i] << " ";
+	}
+	cout << endl;
+	
+	/* Отсортируем массив по убыванию */
+	for(int i = 1; i < n; ++i)
+	{
+		for(int r = 0; r < n-i; r++)
+		{
+			if(mass[r] < mass[r+1])
+			{
+				// Обмен местами
+				int temp = mass[r];
+				mass[r] = mass[r+1];
+				mass[r+1] = temp;
+			}
+		}
+	}
+	
+	/* Выведем отсортированный массив */
+	cout << "Отсортированный массив: ";
+	for(int i = 0; i < n; ++i)
+	{
+		cout << mass[i] << " ";
+	}
+	cout << endl;
+
+}
+
+void Lab5()
+{
+    setlocale(LC_ALL, "Rus");
+    int arr[5][5];
+    int zeroRows = 0;
+
+    // Ввод элементов массива с клавиатуры
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            cout << "Введите элемент [" << i << "][" << j << "]: ";
+            cin >> arr[i][j];
+        }
+    }
+
+    // Подсчет количества строк с нулевыми элементами
+    for (int i = 0; i < 5; i++) 
+    {
+        bool hasZero = false;
+        for (int j = 0; j < 5; j++) 
+        {
+            if (arr[i][j] == 0)
+            {
+                hasZero = true;
+                break;
+            }
+        }
+        if (hasZero) {
+            zeroRows++;
+        }
+    }
+
+    // Вывод результата
+    cout << "Количество строк, в которых встречаются нулевые элементы: " << zeroRows << endl;
 }
 
 
