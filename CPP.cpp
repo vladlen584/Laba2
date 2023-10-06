@@ -1,6 +1,4 @@
-﻿
-
-#include <iostream>
+﻿#include <iostream>
 #include <cmath>
 #include <Windows.h> 
 #include <algorithm>
@@ -19,6 +17,7 @@ void Lab3B();
 void Lab4();
 void Lab4B();
 void Lab5();
+void Lab5B();
 // 1) Ввести строку через cin - вывести её несколько раз помноженную на саму себя от 1 до x (x > 0)
     //Пример:
     //"Vlad" - ввели
@@ -41,7 +40,7 @@ void Lab5();
 
 int main()
 {
-    Lab4B();
+    Lab5B();
 }
 
 void task1()
@@ -405,12 +404,10 @@ void Lab4()
 void Lab4B()
 {
     setlocale(LC_ALL, "Rus");
-   /* Установим размер массива */
-	int n; // Кол-во элементов
+   int n; 
 	cout << "Количество элементов: ";
 	cin >> n; 
 	
-	/* Заполним массив значениями */
     int* mass = new int[n];
 	for(int i = 0; i < n; ++i)
 	{
@@ -418,7 +415,6 @@ void Lab4B()
 		cin >> mass[i]; 
 	} 
 	
-	/* Выведем исходный массив */
 	cout << "Исходный массив: ";
 	for(int i = 0; i < n; ++i)
 	{
@@ -426,22 +422,20 @@ void Lab4B()
 	}
 	cout << endl;
 	
-	/* Отсортируем массив по убыванию */
+	
 	for(int i = 1; i < n; ++i)
 	{
 		for(int r = 0; r < n-i; r++)
 		{
 			if(mass[r] < mass[r+1])
 			{
-				// Обмен местами
+			
 				int temp = mass[r];
 				mass[r] = mass[r+1];
 				mass[r+1] = temp;
 			}
 		}
 	}
-	
-	/* Выведем отсортированный массив */
 	cout << "Отсортированный массив: ";
 	for(int i = 0; i < n; ++i)
 	{
@@ -456,8 +450,6 @@ void Lab5()
     setlocale(LC_ALL, "Rus");
     int arr[5][5];
     int zeroRows = 0;
-
-    // Ввод элементов массива с клавиатуры
     for (int i = 0; i < 5; i++)
     {
         for (int j = 0; j < 5; j++)
@@ -466,8 +458,6 @@ void Lab5()
             cin >> arr[i][j];
         }
     }
-
-    // Подсчет количества строк с нулевыми элементами
     for (int i = 0; i < 5; i++) 
     {
         bool hasZero = false;
@@ -483,9 +473,73 @@ void Lab5()
             zeroRows++;
         }
     }
-
-    // Вывод результата
     cout << "Количество строк, в которых встречаются нулевые элементы: " << zeroRows << endl;
+}
+
+void Lab5B()
+{
+    setlocale(LC_ALL, "Rus");
+    int N=3, M=3,max=0,min=0;
+    cout << "Количество элементов строк: ";
+    cin >> N;
+    cout << "Количество элементов столбцов: ";
+    cin >> M;
+    if(N>100||M>100||N<0||M<0)
+    {
+        cout << "Превышен лимит значения";
+        return;
+    }
+    // 1 2 3
+    // 4 5 6
+    // 7 8 9
+    
+    // 9 6 3
+    // 4 5 2 
+    // 7 8 1
+
+   
+    int mass[100][100];
+    int min_v = INT16_MAX, max_v = INT16_MIN;
+
+    for(int i=0;i<N;i++)
+    {
+        for(int y=0;y<M;y++)
+        {
+            cout << "Введите элемент [" << i+1 << "][" << y+1 << "]: ";
+            cin >> mass[y][y];
+            if(mass[i][y]>max_v)
+            {
+                max_v = mass[i][y];
+                max_v = i;
+            }
+            else
+            {
+                if (mass[i][y] < min_v)
+                {
+                    min_v = mass[i][y];
+                    min_v = i;
+                }
+
+            }
+        }
+       
+    }
+    for (int y = 0; y < M; y++)
+    {
+        int temp = mass[min][y];
+        mass[min][y] = mass[max][y];
+        mass[max][y] = temp;
+    }
+    cout << "\nИзмененная матрица:\n";
+    for (int i = 0; i < N; i++) 
+    {
+        for (int y = 0;y < M; y++)
+        {
+            cout << mass[i][y] << " ";
+        }
+        cout << endl;
+    }
+
 }
 
 
