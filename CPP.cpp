@@ -479,7 +479,7 @@ void Lab5()
 void Lab5B()
 {
     setlocale(LC_ALL, "Rus");
-    int N=3, M=3,max=0,min=0;
+    int N, M,max=0,min=0;
     cout << "Количество элементов строк: ";
     cin >> N;
     cout << "Количество элементов столбцов: ";
@@ -506,18 +506,19 @@ void Lab5B()
         for(int y=0;y<M;y++)
         {
             cout << "Введите элемент [" << i+1 << "][" << y+1 << "]: ";
-            cin >> mass[y][y];
+            cin >> mass[i][y];
             if(mass[i][y]>max_v)
             {
                 max_v = mass[i][y];
-                max_v = i;
+                max = i;
+              
             }
             else
             {
                 if (mass[i][y] < min_v)
                 {
                     min_v = mass[i][y];
-                    min_v = i;
+                    min = i;
                 }
 
             }
@@ -530,7 +531,7 @@ void Lab5B()
         mass[min][y] = mass[max][y];
         mass[max][y] = temp;
     }
-    cout << "\nИзмененная матрица:\n";
+    cout << "Измененная матрица:\n";
     for (int i = 0; i < N; i++) 
     {
         for (int y = 0;y < M; y++)
