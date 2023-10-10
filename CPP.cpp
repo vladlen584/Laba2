@@ -2,6 +2,7 @@
 #include <cmath>
 #include <Windows.h> 
 #include <algorithm>
+#include <math.h>
 using namespace std;
 void task1();
 void task2();
@@ -18,6 +19,10 @@ void Lab4();
 void Lab4B();
 void Lab5();
 void Lab5B();
+void Lab6();
+void function(double x,int n, double = 2.71);
+void Karim4ik();
+
 // 1) Ввести строку через cin - вывести её несколько раз помноженную на саму себя от 1 до x (x > 0)
     //Пример:
     //"Vlad" - ввели
@@ -40,7 +45,44 @@ void Lab5B();
 
 int main()
 {
-    Lab5B();
+    
+    setlocale(LC_ALL, "rus");
+    int number;
+    cout << "Выберите номер программы: ";
+    cin >> number;
+    switch (number)
+    {
+    case 1:
+        Lab2();
+        break;
+    case 2:
+        lab3();
+        break;
+    case 3:
+        Lab3B();
+        break;
+    case 4:
+        Lab4();
+        break;
+    case 5:
+        Lab4B();
+        break;
+    case 6:
+        Lab5();
+        break;
+    case 7:
+        Lab5B();
+        break;
+    case 8:
+        Lab6();
+        break;
+    case 999:
+        Karim4ik();
+        break;
+    default:
+        cout << "Программы по заданному числу не обнаружено!";
+        break;
+    }
 }
 
 void task1()
@@ -217,6 +259,7 @@ void task5()
 void Lab2()
 {
     setlocale(LC_ALL, "RUS");
+    cout << "Добро пожаловать в лабораторную работу №2""\n";
     float x, y, fx = 0, a = 0;
     int g;
     cout << "Введите x: ";
@@ -332,6 +375,7 @@ void test()
 void lab3()
 {
     setlocale(LC_ALL, "Rus");
+    cout << "Добро пожаловать в лабораторную работу №3""\n";
     double a, b, h;
     int n;
     cout << "Введите a: ";
@@ -356,6 +400,7 @@ void lab3()
 
 void Lab3B()
 {
+    cout << "Добро пожаловать в лабораторную работу №3B""\n";
     double a = 0.1, b = 1, h = (b - a) / 10;
     double x, y, s;
     int k = 160;
@@ -380,6 +425,7 @@ void Lab3B()
 void Lab4()
 {
     setlocale(LC_ALL, "Rus");
+    cout << "Добро пожаловать в лабораторную работу №4""\n";
     int arr[10];
     int sumPositive = 0;
     int productNegative = 1;
@@ -404,6 +450,7 @@ void Lab4()
 void Lab4B()
 {
     setlocale(LC_ALL, "Rus");
+    cout << "Добро пожаловать в лабораторную работу №4B""\n";
    int n; 
 	cout << "Количество элементов: ";
 	cin >> n; 
@@ -448,6 +495,7 @@ void Lab4B()
 void Lab5()
 {
     setlocale(LC_ALL, "Rus");
+    cout << "Добро пожаловать в лабораторную работу №5""\n";
     int arr[5][5];
     int zeroRows = 0;
     for (int i = 0; i < 5; i++)
@@ -479,6 +527,7 @@ void Lab5()
 void Lab5B()
 {
     setlocale(LC_ALL, "Rus");
+    cout << "Добро пожаловать в лабораторную работу №5B""\n";
     int N, M,max=0,min=0;
     cout << "Количество элементов строк: ";
     cin >> N;
@@ -489,14 +538,6 @@ void Lab5B()
         cout << "Превышен лимит значения";
         return;
     }
-    // 1 2 3
-    // 4 5 6
-    // 7 8 9
-    
-    // 9 6 3
-    // 4 5 2 
-    // 7 8 1
-
    
     int mass[100][100];
     int min_v = INT16_MAX, max_v = INT16_MIN;
@@ -525,13 +566,22 @@ void Lab5B()
         }
        
     }
+    cout << "\nИсходная матрица:\n";
+    for (int i = 0; i < N; i++)
+    {
+        for (int y = 0; y < M; y++)
+        {
+            cout << mass[i][y] << " ";
+        }
+        cout << endl;
+    }
     for (int y = 0; y < M; y++)
     {
         int temp = mass[min][y];
         mass[min][y] = mass[max][y];
         mass[max][y] = temp;
     }
-    cout << "Измененная матрица:\n";
+    cout << "\nИзмененная матрица:\n";
     for (int i = 0; i < N; i++) 
     {
         for (int y = 0;y < M; y++)
@@ -542,6 +592,67 @@ void Lab5B()
     }
 
 }
+
+void Lab6()
+{
+    setlocale(LC_ALL, "Rus");
+    cout << "Добро пожаловать в лабораторную работу №6""\n";
+    double a=0.13, b=0.9, h,e=2.71;
+    int n=10;
+    h = (b - a) / 10;
+    for (double x = a; x <= b; x = x + h)
+    {
+        function(x,n,e);
+    }
+}
+
+void function(double x, int n, double e)
+{
+    e = 2.71;
+    double y = 0;
+    for (int i = 1; i <= n; i++)
+    {
+        y += pow(3 * e, i * x) + tan(x);
+    }
+    cout << x << "\t\t" << y << endl;
+
+}
+
+void Karim4ik()
+{
+    setlocale(LC_ALL,"Rus");
+    int n;
+    cout << "Количество элементов: ";
+    cin >> n;
+    int* mass = new int[n];
+    int number = sizeof(mass) / sizeof(mass[n=0]);
+    for (int i = 0; i < n; ++i)
+    {
+        cout << i + 1 << "-ый элемент: ";
+        cin >> mass[i];
+    }
+
+    cout << "Исходный массив: ";
+    for (int i = 0; i < n; ++i)
+    {
+        cout << mass[i] << " ";
+    }
+    cout << endl;
+    for(int i=0;i<number;i++)
+    {
+        if(mass[i]==mass[number]-1)
+        {
+            cout << "Элемент " << mass[i] << "входит в массив  более одного раза \n";
+            break;
+        }
+        else
+        {
+            cout << "Элемент " << mass[i] << " входит в массив не более одного раза!";
+            break;
+        }
+    }
+}
+
 
 
 
