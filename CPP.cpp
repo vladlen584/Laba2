@@ -3,6 +3,7 @@
 #include <Windows.h> 
 #include <algorithm>
 #include <math.h>
+#include <limits>
 using namespace std;
 void task1();
 void task2();
@@ -22,6 +23,7 @@ void Lab5B();
 void Lab6();
 void function(double x,int n, double = 2.71);
 void Karim4ik();
+void yh();
 
 // 1) Ввести строку через cin - вывести её несколько раз помноженную на саму себя от 1 до x (x > 0)
     //Пример:
@@ -80,7 +82,8 @@ int main()
         Karim4ik();
         break;
     default:
-        cout << "Программы по заданному числу не обнаружено!";
+        yh();
+        //cout << "Программы по заданному числу не обнаружено!";
         break;
     }
 }
@@ -650,6 +653,50 @@ void Karim4ik()
             cout << "Элемент " << mass[i] << " входит в массив не более одного раза!";
             break;
         }
+    }
+}
+
+void Lab6B()
+{
+    cout << "Добро пожаловать в лабораторную работу №3B""\n";
+    double a = 0.8, b = 1.8, h = (b - a) / 10;
+    double x, y, s;
+    const int infinity = INT_MAX;
+    cout << "x\t\ty(x)\t\ts(x)\n";
+    for (x = a; x <= b; x += h)
+    {
+        y = log(x);
+        s = x;
+        double term = x;
+        for (double n = 1; n <= infinity; n++)
+        {
+            term *= -1 * (pow(x, 2) / ((2 * n + 1) * (2 * n)));
+            s = s + term;
+        }
+        cout << x << "\t\t" << y << "\t\t" << -s << "\n";
+    }
+
+}
+
+void yh()
+{
+    cout << "Добро пожаловать в лабораторную работу №3B""\n";
+    double a = 0.1, b = 1, h = (b - a) / 10;
+    double x, y, s;
+    int k = 140;
+
+    cout << "x\t\ty(x)\t\ts(x)\n";
+    for (x = a; x <= b; x += h)
+    {
+        y = exp(2*x);
+        s = 1;
+        double term = s;
+        for (double n = 1; n <= k; n++)
+        {
+            term *= (2 * x) / n;
+            s = s + term;
+        }
+        cout << x << "\t\t" << y << "\t\t" << s << "\n";
     }
 }
 
