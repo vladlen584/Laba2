@@ -21,7 +21,10 @@ void Lab4B();
 void Lab5();
 void Lab5B();
 void Lab6();
-void function(double x,int n, double = 2.71);
+void Lab6B();
+void function(double x,int n);
+void Lab7();
+void Lab6B_function(double a, double b);
 void Karim4ik();
 void yh();
 
@@ -80,6 +83,10 @@ int main()
         break;
     case 999:
         Karim4ik();
+    case 10:
+        Lab6B();
+    case 11:
+        Lab7();
         break;
     default:
         yh();
@@ -600,22 +607,21 @@ void Lab6()
 {
     setlocale(LC_ALL, "Rus");
     cout << "Добро пожаловать в лабораторную работу №6""\n";
-    double a=0.13, b=0.9, h,e=2.71;
-    int n=10;
+    double a = 0.13, b = 0.9, h;
+    int n=10;;
     h = (b - a) / 10;
     for (double x = a; x <= b; x = x + h)
     {
-        function(x,n,e);
+        function(x,n);
     }
 }
 
-void function(double x, int n, double e)
+void function(double x, int n)
 {
-    e = 2.71;
     double y = 0;
     for (int i = 1; i <= n; i++)
     {
-        y += pow(3 * e, i * x) + tan(x);
+        y += 3*exp(i*x) + 1 / tan(x);
     }
     cout << x << "\t\t" << y << endl;
 
@@ -660,22 +666,27 @@ void Lab6B()
 {
     cout << "Добро пожаловать в лабораторную работу №3B""\n";
     double a = 0.8, b = 1.8, h = (b - a) / 10;
-    double x, y, s;
-    const int infinity = INT_MAX;
+    double x, y, s=0;
+    int n = 1;
     cout << "x\t\ty(x)\t\ts(x)\n";
-    for (x = a; x <= b; x += h)
-    {
-        y = log(x);
-        s = x;
-        double term = x;
-        for (double n = 1; n <= infinity; n++)
-        {
-            term *= -1 * (pow(x, 2) / ((2 * n + 1) * (2 * n)));
-            s = s + term;
-        }
-        cout << x << "\t\t" << y << "\t\t" << -s << "\n";
-    }
+    Lab6B_function(a,b);
 
+}
+
+void Lab6B_function(double a,double b)
+{
+    int n = 1;
+    double s = 0;
+    double y = 0;
+    double h = (b - a) / 10;
+    for (double x = a; x <= b; x += h)
+    {
+        s += -1 * pow(-1, n) * pow(x - 1, n) / n;
+        n++;
+        y = round(log(x) * 10000) / 10000;
+        s = round(s * 10000) / 10000;
+        cout << x << "\t\t" << y << "\t\t" << s << "\n";
+    }
 }
 
 void yh()
@@ -698,6 +709,12 @@ void yh()
         }
         cout << x << "\t\t" << y << "\t\t" << s << "\n";
     }
+}
+
+void Lab7()
+{
+    setlocale(LC_ALL, "Rus");
+    cout << "В разработке!";
 }
 
 
