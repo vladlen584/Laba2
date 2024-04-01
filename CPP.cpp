@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <cmath>
 #include <Windows.h> 
 #include <algorithm>
@@ -751,6 +751,39 @@ void bubbleSort(int arr[], int n)
         }
     }
 
+include <iostream>
+#include <unordered_map>
+#include <vector>
+
+void removeDuplicates(std::vector<int>& arr) {
+    std::unordered_map<int, int> countMap;
+    
+    for (int num : arr) {
+        countMap[num]++;
+    }
+    
+    arr.erase(std::remove_if(arr.begin(), arr.end(), [&](int num) { return countMap[num] > 1; }), arr.end());
+}
+
+int main() {
+    std::vector<int> arr = {1, 2, 3, 4, 2, 5, 6, 3, 7, 8, 2};
+    
+    std::cout << "Original array:" << std::endl;
+    for (int num : arr) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+    
+    removeDuplicates(arr);
+    
+    std::cout << "Array after removing duplicates:" << std::endl;
+    for (int num : arr) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+    
+    return 0;
+}
 
 
 
