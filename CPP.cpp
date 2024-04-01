@@ -786,7 +786,37 @@ int main() {
 }
 
 
+include <iostream>
+#include <unordered_map>
+#include <algorithm>
 
+int main() {
+    int arr[] = {1, 2, 3, 4, 2, 5, 6, 3, 7, 8, 2};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    std::unordered_map<int, int> countMap;
+
+    for (int i = 0; i < n; ++i) {
+        countMap[arr[i]]++;
+    }
+
+    int index = 0;
+    for (int i = 0; i < n; ++i) {
+        if (countMap[arr[i]] == 1) {
+            arr[index++] = arr[i];
+        }
+    }
+
+    n = index;
+
+    std::cout << "Array after removing duplicates:" << std::endl;
+    for (int i = 0; i < n; ++i) {
+        std::cout << arr[i] << " ";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
 
 
 
