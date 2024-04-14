@@ -818,6 +818,90 @@ int main() {
     return 0;
 }
 
+// изменение 14.04.24
+struct Student{
+    string surname;
+    int birthYear;
+    int key;
+};
+
+int linearSearch(Student arr[], int size, int key) {
+    for (int i = 0; i < size; i++) {
+        if (arr[i].key == key) {
+            return i;
+        }
+    }
+    return -1; // элемент не найден
+}
+
+int binarySearch(Student arr[], int size, int key) {
+    int left = 0;
+    int right = size - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+
+        if (arr[mid].key == key) {
+            return mid;
+        }
+        else if (arr[mid].key < key) {
+            left = mid + 1;
+        }
+        else {
+            right = mid - 1;
+        }
+    }
+
+    return -1; // элемент не найден
+}
+void findStudentBornIn1980(Student arr[], int size) {
+    int index = linearSearch(arr, size, 1980);
+
+    if (index != -1) {
+        cout << "Фамилия студента, родившегося в 1980 году: " << arr[index].surname << endl;
+    }
+    else {
+        cout << "Студент, родившийся в 1980 году, не найден." << endl;
+    }
+}
+
+int countNegativeElements(int arr[], int size) {
+    int count = 0;
+    for (int i = 0; i < size; i++) {
+        if (arr[i] < 0) {
+            count++;
+        }
+    }
+    return count;
+}
+
+void Lab12b()
+{
+
+    setlocale(LC_ALL, "Rus");
+    // Ввод массива структур Student с клавиатуры
+    const int size = 5; // размер массива
+    Student students[size] = { {"Иванов", 1978, 1980}, {"Петров", 1980, 1990}, {"Сидоров", 1979, 2000}, {"Козлов", 1982, 2005}, {"Смирнов", 1985, 2010} };
+
+    // Поиск студента, родившегося в 1980 году
+    findStudentBornIn1980(students, size);
+
+    // Подсчет отрицательных элементов в массиве
+    int n;
+    cout << "Введите размер массива" << endl;
+    cin >> n;
+    int* mass = new int[n];
+    for (int i = 0; i < n; i++)
+    {
+        cout << i + 1 << "-ый элемент: ";
+        cin >> mass[i];
+    }
+    int negativeCount = countNegativeElements(mass, size);
+    cout << "Количество отрицательных элементов в массиве: " << negativeCount << endl;
+
+   
+}
+
 
 
 
