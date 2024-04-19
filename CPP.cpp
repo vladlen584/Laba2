@@ -902,8 +902,99 @@ void Lab12b()
    
 }
 
+изменение 
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+typedef struct Node {
+    int data;
+    struct Node* next;
+} Node;
+
+typedef struct Stack {
+    Node* top;
+} Stack;
+
+void push(Stack* stack, int data) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    if (!newNode) {
+        printf("Ошибка выделения памяти\n");
+        exit(1);
+    }
+    newNode->data = data;
+    newNode->next = stack->top;
+    stack->top = newNode;
+}
+
+int pop(Stack* stack) {
+    if (stack->top == NULL) {
+        printf("Стек пуст\n");
+        exit(1);
+    }
+    int data = stack->top->data;
+    Node* temp = stack->top;
+    stack->top = stack->top->next;
+    free(temp);
+    return data;
+}
+
+bool isEmpty(Stack* stack) {
+    return stack->top == NULL;
+}
+
+void deleteOddNumbers(Stack* stack) {
+    Stack tempStack;
+    tempStack.top = NULL;
+
+    while (!isEmpty(stack)) {
+        int data = pop(stack);
+        if (data % 2 == 0) {
+            push(&tempStack, data);
+        }
+    }
+
+    while (!isEmpty(&tempStack)) {
+        push(stack, pop(&tempStack));
+    }
+}
+
+void freeStack(Stack* stack) {
+    while (!isEmpty(stack)) {
+        pop(stack);
+    }
+}
+
+int main() {
+    Stack stack;
+    stack.top = NULL;
+
+    int n;
+    printf("Введите количество элементов в стеке: ");
+    scanf("%d", &n);
+
+    for (int i = 0; i < n; i++) {
+        push(&stack, rand() % 100); // Заполняем стек случайными числами от 0 до 99
+    }
+
+    printf("Исходный стек:\n");
+    while (!isEmpty(&stack)) {
+        printf("%d ", pop(&stack));
+    }
+
+    deleteOddNumbers(&stack);
+
+    printf("\nСтек после удаления нечетных чисел:\n");
+    while (!isEmpty(&stack)) {
+        printf("%d ", pop(&stack));
+    }
+
+    freeStack(&stack);
+
+    return 0;
+}
 
 
 
