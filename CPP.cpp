@@ -997,4 +997,25 @@ int main() {
 }
 
 
+    std::stack<int> myStack;
+    int numElements;
+
+    std::cout << "Введите количество элементов, которые хотите добавить в стек: ";
+    std::cin >> numElements;
+
+    for (int i = 0; i < numElements; ++i) {
+        int num;
+        std::cout << "Введите число для добавления в стек: ";
+        std::cin >> num;
+        myStack.push(num);
+    }
+
+    std::cout << "Элементы стека: ";
+    while (!myStack.empty()) {
+        std::cout << myStack.top() << " ";
+        myStack.pop();
+    }
+
+    return 0;
+}
 
