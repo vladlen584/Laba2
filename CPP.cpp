@@ -1113,4 +1113,40 @@ int main() {
     freeStack(&stack);
 
     re
+иииизззз
+
+include <iostream>
+#include <stack>
+#include <climits>
+
+int main() {
+    int p;
+    std::cout << "Введите количество элементов в стеке: ";
+    std::cin >> p;
+
+    std::stack<int> myStack;
+    int minElement = INT_MAX;
+
+    std::cout << "Введите " << p << " целых чисел для стека:\n";
+    for (int i = 0; i < p; i++) {
+        int num;
+        std::cin >> num;
+        myStack.push(num);
+        if (num < minElement) {
+            minElement = num;
+        }
+    }
+
+    std::cout << "Минимальный элемент в стеке: " << minElement << std::endl;
+
+    std::cout << "Освобождение динамической памяти...\n";
+    while (!myStack.empty()) {
+        myStack.pop();
+    }
+
+    return 0;
+}
+
+
+
 
