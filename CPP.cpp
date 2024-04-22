@@ -997,9 +997,55 @@ void Lab13A()
 
     // Освобождение памяти
     stack = DelStackAll(stack);
-
-    
 }
 
+// Для лиды 
+
+#include <iostream>
+#include <algorithm>
+#include <string>
+#include <vector>
+
+struct VegetableSeed {
+    std::string name;
+    std::vector<int> plantingMonths;
+};
+
+int main() {
+    // Выделение памяти для списка семян овощей
+    int n;
+    std::cout << "Введите количество семян овощей: ";
+    std::cin >> n;
+    VegetableSeed* seeds = new VegetableSeed[n];
+
+    // Ввод данных
+    std::cout << "Введите данные о семенах овощей:\n";
+    for (int i = 0; i < n; ++i) {
+        std::cout << "Семя " << i + 1 << ":\n";
+        std::cout << "Название: ";
+        std::cin >> seeds[i].name;
+        std::cout << "Месяцы посадки: ";
+        int month;
+        for (int j = 0; j < 3; ++j) {
+            std::cin >> month;
+            seeds[i].plantingMonths.push_back(month);
+        }
+    }
+
+    // Сортировка списка по названию и вывод названий овощей с урожаем в августе
+    std::sort(seeds, seeds + n, [](const VegetableSeed& a, const VegetableSeed& b) {
+        return a.name < b.name;
+    });
+    std::cout << "\nОвощи с урожаем в августе:\n";
+    for (int i = 0; i < n; ++i) {
+        if (std::find(seeds[i].plantingMonths.begin(), seeds[i].plantingMonths.end(), 8) != seeds[i].plantingMonths.end()) {
+            std::cout << seeds[i].name << std::endl;
+        }
+    }
+
+    // Освобождение памяти
+    delete[] seeds;
+    return 0;
+}
 
 
