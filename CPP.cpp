@@ -902,251 +902,104 @@ void Lab12b()
    
 }
 
-изменение 
+// изменения 23.04.24
 
+struct tlist {
+    int inf;
+    tlist* a;
+};
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
+// Добавление элемента в стек
+tlist* AddStack(tlist* sp, int inf) {
+    tlist* spt = new tlist;
+    spt->inf = inf;
+    spt->a = sp;
+    return spt;
+}
 
-typedef struct Node {
-    int data;
-    struct Node* next;
-} Node;
+// Чтение элемента с удалением
+tlist* ReadStackD(tlist* sp, int& inf) {
+    if (sp == NULL) return NULL;
+    tlist* spt = sp;
+    inf = sp->inf;
+    sp = sp->a;
+    delete spt;
+    return sp;
+}
 
-typedef struct Stack {
-    Node* top;
-} Stack;
+// Удаление элемента, следующего за текущим
+void DelStackAfter(tlist* sp) {
+    if (sp->a == NULL) return;
+    tlist* spt = sp->a;
+    sp->a = sp->a->a;
+    delete spt;
+}
 
-void push(Stack* stack, int data) {
-    Node* newNode = (Node*)malloc(sizeof(Node));
-    if (!newNode) {
-        printf("Ошибка выделения памяти\n");
-        exit(1);
+// Добавление элемента в стек после текущего
+void AddStackAfter(tlist* sp, int inf) {
+    tlist* spt = new tlist;
+    spt->inf = inf;
+    if (sp->a == NULL) spt->a = NULL;
+    else spt->a = sp->a;
+    sp->a = spt;
+}
+
+// Удаление всего стека
+tlist* DelStackAll(tlist* sp) {
+    tlist* spt;
+    int inf;
+    while (sp != NULL) {
+        spt = sp;
+        inf = sp->inf;
+        cout << inf << endl;
+        sp = sp->a;
+        delete spt;
     }
-    newNode->data = data;
-    newNode->next = stack->top;
-    stack->top = newNode;
+    return NULL;
 }
 
-int pop(Stack* stack) {
-    if (stack->top == NULL) {
-        printf("Стек пуст\n");
-        exit(1);
-    }
-    int data = stack->top->data;
-    Node* temp = stack->top;
-    stack->top = stack->top->next;
-    free(temp);
-    return data;
-}
-
-bool isEmpty(Stack* stack) {
-    return stack->top == NULL;
-}
-
-void deleteOddNumbers(Stack* stack) {
-    Stack tempStack;
-    tempStack.top = NULL;
-
-    while (!isEmpty(stack)) {
-        int data = pop(stack);
-        if (data % 2 == 0) {
-            push(&tempStack, data);
+// Нахождение минимального элемента в стеке
+int FindMinInStack(tlist* sp, int& minVal) {
+    if (sp == NULL) return -1; // Стек пуст
+    minVal = sp->inf; // Инициализация минимального значения
+    tlist* current = sp;
+    while (current != NULL) {
+        if (current->inf < minVal) {
+            minVal = current->inf; // Обновление минимального значения
         }
+        current = current->a;
     }
-
-    while (!isEmpty(&tempStack)) {
-        push(stack, pop(&tempStack));
-    }
+    return 0; // Успешное выполнение
 }
 
-void freeStack(Stack* stack) {
-    while (!isEmpty(stack)) {
-        pop(stack);
-    }
-}
-
-int main() {
-    Stack stack;
-    stack.top = NULL;
-
+void Lab13A()
+{
+    setlocale(LC_ALL, "Rus");
+    tlist* stack = NULL; // Инициализация пустого стека
     int n;
-    printf("Введите количество элементов в стеке: ");
-    scanf("%d", &n);
+    cout << "Введите количество элементов в стеке: ";
+    cin >> n;
 
-    for (int i = 0; i < n; i++) {
-        push(&stack, rand() % 100); // Заполняем стек случайными числами от 0 до 99
+    cout << "Введите элементы стека: ";
+    for (int i = 0; i < n; ++i) {
+        int value;
+        cin >> value;
+        stack = AddStack(stack, value); // Добавление элементов в стек
     }
 
-    printf("Исходный стек:\n");
-    while (!isEmpty(&stack)) {
-        printf("%d ", pop(&stack));
+    int minVal = INT_MAX;
+    if (FindMinInStack(stack, minVal) == -1) {
+        cout << "Стек пуст." << endl;
+    }
+    else {
+        cout << "Минимальный элемент в стеке: " << minVal << endl;
     }
 
-    deleteOddNumbers(&stack);
+    // Освобождение памяти
+    stack = DelStackAll(stack);
 
-    printf("\nСтек после удаления нечетных чисел:\n");
-    while (!isEmpty(&stack)) {
-        printf("%d ", pop(&stack));
-    }
-
-    freeStack(&stack);
-
-    return 0;
+    
 }
-
-
-    std::stack<int> myStack;
-    int numElements;
-
-    std::cout << "Введите количество элементов, которые хотите добавить в стек: ";
-    std::cin >> numElements;
-
-    for (int i = 0; i < numElements; ++i) {
-        int num;
-        std::cout << "Введите число для добавления в стек: ";
-        std::cin >> num;
-        myStack.push(num);
-    }
-
-    std::cout << "Элементы стека: ";
-    while (!myStack.empty()) {
-        std::cout << myStack.top() << " ";
-        myStack.pop();
-    }
-
-    return 0;
-}
-
-
-изззз
-include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-
-typedef struct Node {
-    int data;
-    struct Node* next;
-} Node;
-
-typedef struct Stack {
-    Node* top;
-} Stack;
-
-void push(Stack* stack, int data) {
-    Node* newNode = (Node*)malloc(sizeof(Node));
-    if (!newNode) {
-        printf("Ошибка выделения памяти\n");
-        exit(1);
-    }
-    newNode->data = data;
-    newNode->next = stack->top;
-    stack->top = newNode;
-}
-
-int pop(Stack* stack) {
-    if (stack->top == NULL) {
-        printf("Стек пуст\n");
-        exit(1);
-    }
-    int data = stack->top->data;
-    Node* temp = stack->top;
-    stack->top = stack->top->next;
-    free(temp);
-    return data;
-}
-
-bool isEmpty(Stack* stack) {
-    return stack->top == NULL;
-}
-
-void deleteOddNumbers(Stack* stack) {
-    Stack tempStack;
-    tempStack.top = NULL;
-
-    while (!isEmpty(stack)) {
-        int data = pop(stack);
-        if (data % 2 == 0) {
-            push(&tempStack, data);
-        }
-    }
-
-    while (!isEmpty(&tempStack)) {
-        push(stack, pop(&tempStack));
-    }
-}
-
-void freeStack(Stack* stack) {
-    while (!isEmpty(stack)) {
-        pop(stack);
-    }
-}
-
-int main() {
-    Stack stack;
-    stack.top = NULL;
-
-    int n;
-    printf("Введите количество элементов в стеке: ");
-    scanf("%d", &n);
-
-    printf("Введите элементы стека:\n");
-    for (int i = 0; i < n; i++) {
-        int data;
-        scanf("%d", &data);
-        push(&stack, data);
-    }
-
-    printf("Исходный стек:\n");
-    while (!isEmpty(&stack)) {
-        printf("%d ", pop(&stack));
-    }
-
-    deleteOddNumbers(&stack);
-
-    printf("\nСтек после удаления нечетных чисел:\n");
-    while (!isEmpty(&stack)) {
-        printf("%d ", pop(&stack));
-    }
-
-    freeStack(&stack);
-
-    re
-иииизззз
-
-include <iostream>
-#include <stack>
-#include <climits>
-
-int main() {
-    int p;
-    std::cout << "Введите количество элементов в стеке: ";
-    std::cin >> p;
-
-    std::stack<int> myStack;
-    int minElement = INT_MAX;
-
-    std::cout << "Введите " << p << " целых чисел для стека:\n";
-    for (int i = 0; i < p; i++) {
-        int num;
-        std::cin >> num;
-        myStack.push(num);
-        if (num < minElement) {
-            minElement = num;
-        }
-    }
-
-    std::cout << "Минимальный элемент в стеке: " << minElement << std::endl;
-
-    std::cout << "Освобождение динамической памяти...\n";
-    while (!myStack.empty()) {
-        myStack.pop();
-    }
-
-    return 0;
-}
-
 
 
 
