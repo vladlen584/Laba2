@@ -1049,3 +1049,169 @@ int main() {
 }
 
 
+// ООП 
+#include "Student.h"
+
+int main() {
+    Student s1;
+    s1.inputInfo();
+    s1.printInfo();
+
+    int scores[] = { 8, 9, 7 };
+    Student s2("Smith", 1998, "New York", scores);
+    s2.printInfo();
+
+    Student* s3 = new Student();
+    s3->inputInfo();
+    s3->printInfo();
+    delete s3;
+
+    Student studentsArray[2];
+    for (int i = 0; i < 2; i++) {
+        studentsArray[i].inputInfo();
+    }
+
+    for (int i = 0; i < 2; i++) {
+        studentsArray[i].printInfo();
+    }
+
+    Student* studentsPtrArray[2];
+
+    for (int i = 0; i < 2; i++) {
+        studentsPtrArray[i] = new Student();
+        studentsPtrArray[i]->inputInfo();
+    }
+
+    for (int i = 0; i < 2; i++) {
+        studentsPtrArray[i]->printInfo();
+        delete studentsPtrArray[i];
+    }
+
+    return 0;
+}
+
+// Implementations of the methods of the Student class go here
+// CPP
+#include "Student.h"
+
+Student::Student() {
+    surname = "";
+    birthYear = 0;
+    birthPlace = "";
+    for (int i = 0; i < 3; i++) {
+        examScores[i] = 0;
+    }
+}
+
+Student::Student(std::string sname, int byear, std::string bplace, int scores[]) {
+    surname = sname;
+    birthYear = byear;
+    birthPlace = bplace;
+    for (int i = 0; i < 3; i++) {
+        examScores[i] = scores[i];
+    }
+}
+
+Student::Student(const Student& s) {
+    surname = s.surname;
+    birthYear = s.birthYear;
+    birthPlace = s.birthPlace;
+    for (int i = 0; i < 3; i++) {
+        examScores[i] = s.examScores[i];
+    }
+}
+
+Student::~Student() {
+    std::cout << "Destroying student: " << surname << std::endl;
+}
+
+void Student::printInfo() {
+    std::cout << "Surname: " << surname << std::endl;
+    std::cout << "Birth Year: " << birthYear << std::endl;
+    std::cout << "Birth Place: " << birthPlace << std::endl;
+    std::cout << "Exam Scores: ";
+    for (int i = 0; i < 3; i++) {
+        std::cout << examScores[i] << " ";
+    }
+    std::cout << std::endl;
+}
+
+void Student::setSurname(std::string sname) {
+    surname = sname;
+}
+
+void Student::setBirthYear(int byear) {
+    birthYear = byear;
+}
+
+void Student::setBirthPlace(std::string bplace) {
+    birthPlace = bplace;
+}
+
+void Student::setExamScores(int scores[]) {
+    for (int i = 0; i < 3; i++) {
+        examScores[i] = scores[i];
+    }
+}
+
+void Student::inputInfo() {
+    std::cout << "Enter surname: ";
+    std::cin >> surname;
+    std::cout << "Enter birth year: ";
+    std::cin >> birthYear;
+    std::cout << "Enter birth place: ";
+    std::cin >> birthPlace;
+    std::cout << "Enter exam scores: ";
+    for (int i = 0; i < 3; i++) {
+        std::cin >> examScores[i];
+    }
+}
+
+std::string Student::getSurname() {
+    return surname;
+}
+
+int Student::getBirthYear() {
+    return birthYear;
+}
+
+std::string Student::getBirthPlace() 
+{
+    return birthPlace;
+}
+// .h
+#ifndef STUDENT_H
+#define STUDENT_H
+
+#include <iostream>
+#include <string>
+
+class Student {
+private:
+    std::string surname;
+    int birthYear;
+    std::string birthPlace;
+    int examScores[3];
+
+public:
+    Student();
+    Student(std::string sname, int byear, std::string bplace, int scores[]);
+    Student(const Student& s);
+    ~Student();
+
+    void printInfo();
+    void setSurname(std::string sname);
+    void setBirthYear(int byear);
+    void setBirthPlace(std::string bplace);
+    void setExamScores(int scores[]);
+    void inputInfo();
+    std::string getSurname();
+    int getBirthYear();
+    std::string getBirthPlace();
+};
+
+#endif
+
+
+
+
